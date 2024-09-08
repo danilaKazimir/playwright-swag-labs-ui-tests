@@ -4,7 +4,7 @@ from pages.base_page import BasePage
 class LoginPage(BasePage):
     URL = 'https://www.saucedemo.com/'
 
-    # Page elements
+    # Get page elements
     def get_username_field(self):
         return self.get_element_by_placeholder("Username")
 
@@ -14,8 +14,44 @@ class LoginPage(BasePage):
     def get_submit_button(self):
         return self.get_element_by_role("button", "Login")
 
+    def get_username_field_error_img(self):
+        return self.get_element_by_locator("svg").first
+
+    def get_password_field_error_img(self):
+        return self.get_element_by_locator("svg").nth(1)
+
+    def get_error_message(self):
+        return self.get_element_by_test_id("error")
+
+    def get_error_message_x_button(self):
+        return self.get_element_by_test_id("error-button")
+
+    # Actions
+    def fill_username_field(self, username):
+        self.get_username_field().fill(username)
+
+    def fill_password_field(self, password):
+        self.get_password_field().fill(password)
+
+    def close_error_message(self):
+        self.get_error_message_x_button().click()
+        self.check_element_is_hidden(self.get_username_field_error_img())
+        self.check_element_is_hidden(self.get_password_field_error_img())
+        self.check_element_is_hidden(self.get_error_message())
+        self.check_element_is_hidden(self.get_error_message_x_button())
+
     # Methods
-    def login_into_swag_labs(self):
-        self.get_username_field().fill("standard_user")
-        self.get_password_field().fill("secret_sauce")
+    def login_into_swag_labs(self, username, password, is_success_login=True, error_text=None):
+        self.fill_username_field(username)
+        self.fill_password_field(password)
         self.get_submit_button().click()
+        if is_success_login:
+            self.check_page_url("https://www.saucedemo.com/inventory.html")
+            self.check_page_title("Swag Labs")
+        else:
+            self.check_element_is_visible(self.get_username_field_error_img())
+            self.check_element_is_visible(self.get_password_field_error_img())
+            self.check_element_is_visible(self.get_error_message())
+            self.check_element_text(self.get_error_message(), error_text)
+            self.check_element_is_visible(self.get_error_message_x_button())
+            self.close_error_message()

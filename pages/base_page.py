@@ -1,9 +1,12 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
+
+    def open_page(self, url):
+        self.page.goto(url)
 
     def get_element_by_role(self, role, name):
         return self.page.get_by_role(role, name=name)
@@ -11,5 +14,23 @@ class BasePage:
     def get_element_by_placeholder(self, placeholder):
         return self.page.get_by_placeholder(placeholder)
 
-    def open_page(self, url):
-        self.page.goto(url)
+    def get_element_by_test_id(self, attribute):
+        return self.page.get_by_test_id(attribute)
+
+    def get_element_by_locator(self, locator):
+        return self.page.locator(locator)
+
+    def check_element_is_visible(self, locator):
+        expect(locator).to_be_visible()
+
+    def check_element_is_hidden(self, locator):
+        expect(locator).to_be_hidden()
+
+    def check_element_text(self, locator, expected_text):
+        expect(locator).to_have_text(expected_text)
+
+    def check_page_url(self, url):
+        expect(self.page).to_have_url(url)
+
+    def check_page_title(self, title):
+        expect(self.page).to_have_title(title)
