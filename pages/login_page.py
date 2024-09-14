@@ -1,9 +1,8 @@
 from pages.base_page import BasePage
+from pages.constants import InventoryPageConstants
 
 
 class LoginPage(BasePage):
-    URL = 'https://www.saucedemo.com/'
-
     # Get page elements
     def get_username_field(self):
         return self.get_element_by_placeholder("Username")
@@ -33,6 +32,9 @@ class LoginPage(BasePage):
     def fill_password_field(self, password):
         self.get_password_field().fill(password)
 
+    def click_on_submit_button(self):
+        self.get_submit_button().click()
+
     def close_error_message(self):
         self.get_error_message_x_button().click()
         self.check_element_is_hidden(self.get_username_field_error_img())
@@ -44,10 +46,10 @@ class LoginPage(BasePage):
     def login_into_swag_labs(self, username, password, is_success_login=True, error_text=None):
         self.fill_username_field(username)
         self.fill_password_field(password)
-        self.get_submit_button().click()
+        self.click_on_submit_button()
         if is_success_login:
-            self.check_page_url("https://www.saucedemo.com/inventory.html")
-            self.check_page_title("Swag Labs")
+            self.check_page_url(InventoryPageConstants.INVENTORY_PAGE_URL)
+            self.check_page_title(InventoryPageConstants.INVENTORY_PAGE_TITLE)
         else:
             self.check_element_is_visible(self.get_username_field_error_img())
             self.check_element_is_visible(self.get_password_field_error_img())
