@@ -8,7 +8,8 @@ class InventoryPage(BasePage):
     FACEBOOK_LINK_TEST_ID = "social-facebook"
     LINKEDIN_LINK_TEST_ID = "social-linkedin"
     FOOTER_COPYRIGHT_TEXT_TEST_ID = "footer-copy"
-    BURGER_MENU_BUTTON = "#react-burger-menu-btn"
+    OPEN_BURGER_MENU_BUTTON = "#react-burger-menu-btn"
+    BURGER_MENU_INNER = ".bm-menu"
     SAUCE_LABS_COM_LINK_VALUE = "About"
     LOGOUT_LINK_VALUE = "Logout"
 
@@ -26,7 +27,10 @@ class InventoryPage(BasePage):
         return self.get_element_by_test_id(self.FOOTER_COPYRIGHT_TEXT_TEST_ID)
 
     def get_burger_button(self):
-        return self.get_element_by_locator(self.BURGER_MENU_BUTTON)
+        return self.get_element_by_locator(self.OPEN_BURGER_MENU_BUTTON)
+
+    def get_burger_menu_inner(self):
+        return self.get_element_by_locator(self.BURGER_MENU_INNER)
 
     def get_about_link(self):
         return self.get_element_by_role("link", self.SAUCE_LABS_COM_LINK_VALUE)
@@ -72,8 +76,11 @@ class InventoryPage(BasePage):
     def check_footer_copyright_text(self):
         self.check_element_text(self.get_footer_copyright_text(), InventoryPageConstants.FOOTER_COPYRIGHT_TEXT)
 
-    def open_about_link(self):
+    def open_burger_menu(self):
         self.click_on_burger_button()
+        self.check_element_is_visible(self.get_burger_menu_inner())
+
+    def open_about_link(self):
         self.click_on_about_link()
         self.check_page_url(InventoryPageConstants.SAUCE_LABS_COM_URL)
         self.check_page_title(InventoryPageConstants.SAUCE_LABS_COM_TITLE)

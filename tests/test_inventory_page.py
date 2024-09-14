@@ -14,7 +14,9 @@ class TestFooter:
 
 class TestBurgerMenu:
     def test_about_link(self, inventory_page, login):
+        inventory_page.open_burger_menu()
         inventory_page.open_about_link()
 
     def test_logout_link(self, inventory_page, login):
+        inventory_page.open_burger_menu()
         inventory_page.logout()
