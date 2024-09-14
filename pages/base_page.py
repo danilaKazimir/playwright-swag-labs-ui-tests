@@ -1,3 +1,4 @@
+from typing import Callable
 from playwright.sync_api import Page, expect
 
 
@@ -34,3 +35,9 @@ class BasePage:
 
     def check_page_title(self, title):
         expect(self.page).to_have_title(title)
+
+    def open_new_browser_tab_page_by_action(self, action: Callable[[], None]) -> None:
+        """Open a new browser tab after some action and change the context to the opened tab"""
+        with self.page.context.expect_page() as new_page:
+            action()
+        self.page = new_page.value

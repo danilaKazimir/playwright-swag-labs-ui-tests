@@ -1,11 +1,10 @@
 from pages.login_page import LoginPage
 import pytest
 
-VALID_DATA = {
+VALID_LOGIN_DATA = {
     "username": "standard_user",
     "password": "secret_sauce"
 }
-
 INVALID_LOGIN_DATA = (
     ("", ""),
     ("", "secret_sauce"),
@@ -23,14 +22,13 @@ ERROR_MESSAGES = {
 }
 
 
-def test_successful_login_into_swag_labs(page):
-    login_page = LoginPage(page)
+def test_successful_login_into_swag_labs(login_page):
     login_page.open_page(LoginPage.URL)
-    login_page.login_into_swag_labs(VALID_DATA["username"], VALID_DATA["password"])
+    login_page.login_into_swag_labs(VALID_LOGIN_DATA["username"], VALID_LOGIN_DATA["password"])
 
 
 @pytest.mark.parametrize("username, password", INVALID_LOGIN_DATA)
-def test_unsuccessful_login_into_swag_labs(page, username, password):
+def test_unsuccessful_login_into_swag_labs(login_page, username, password):
     if username == "":
         expected_error = ERROR_MESSAGES["Username isn't filled"]
     elif password == "" and username != "":
@@ -39,6 +37,5 @@ def test_unsuccessful_login_into_swag_labs(page, username, password):
         expected_error = ERROR_MESSAGES["Locked user"]
     else:
         expected_error = ERROR_MESSAGES["Incorrect login values"]
-    login_page = LoginPage(page)
     login_page.open_page(LoginPage.URL)
     login_page.login_into_swag_labs(username, password, is_success_login=False, error_text=expected_error)
