@@ -1,32 +1,40 @@
 from pages.base_page import BasePage
-from pages.locators import InventoryPageLocators
 from pages.constants import InventoryPageConstants, LoginPageConstants
 
 
 class InventoryPage(BasePage):
+    # Page locators
+    TWITTER_LINK_TEST_ID = "social-twitter"
+    FACEBOOK_LINK_TEST_ID = "social-facebook"
+    LINKEDIN_LINK_TEST_ID = "social-linkedin"
+    FOOTER_COPYRIGHT_TEXT_TEST_ID = "footer-copy"
+    BURGER_MENU_BUTTON = "#react-burger-menu-btn"
+    SAUCE_LABS_COM_LINK_VALUE = "About"
+    LOGOUT_LINK_VALUE = "Logout"
+
     # Get page elements
     def get_twitter_link(self):
-        return self.get_element_by_test_id(InventoryPageLocators.TWITTER_LINK_DATA_TEST_VALUE)
+        return self.get_element_by_test_id(self.TWITTER_LINK_TEST_ID)
 
     def get_facebook_link(self):
-        return self.get_element_by_test_id(InventoryPageLocators.FACEBOOK_LINK_DATA_TEST_VALUE)
+        return self.get_element_by_test_id(self.FACEBOOK_LINK_TEST_ID)
 
     def get_linkedin_link(self):
-        return self.get_element_by_test_id(InventoryPageLocators.LINKEDIN_LINK_DATA_TEST_VALUE)
+        return self.get_element_by_test_id(self.LINKEDIN_LINK_TEST_ID)
 
     def get_footer_copyright_text(self):
-        return self.get_element_by_test_id(InventoryPageLocators.FOOTER_COPYRIGHT_TEXT_DATA_TEST_VALUE)
+        return self.get_element_by_test_id(self.FOOTER_COPYRIGHT_TEXT_TEST_ID)
 
     def get_burger_button(self):
-        return self.get_element_by_locator(InventoryPageLocators.BURGER_BUTTON)
+        return self.get_element_by_locator(self.BURGER_MENU_BUTTON)
 
     def get_about_link(self):
-        return self.get_element_by_role("link", InventoryPageLocators.SAUCE_LABS_COM_LINK_VALUE)
+        return self.get_element_by_role("link", self.SAUCE_LABS_COM_LINK_VALUE)
 
     def get_logout_link(self):
-        return self.get_element_by_role("link", InventoryPageLocators.LOGOUT_LINK_VALUE)
+        return self.get_element_by_role("link", self.LOGOUT_LINK_VALUE)
 
-    # Actions
+    # Page actions
     def click_on_twitter_link(self):
         self.get_twitter_link().click()
 
@@ -45,7 +53,7 @@ class InventoryPage(BasePage):
     def click_on_logout_link(self):
         self.get_logout_link().click()
 
-    # Methods
+    # Page methods
     def open_twitter_link(self):
         self.open_new_browser_tab_page_by_action(self.click_on_twitter_link)
         self.check_page_url(InventoryPageConstants.TWITTER_PAGE_URL)
