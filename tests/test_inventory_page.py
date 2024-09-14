@@ -10,3 +10,11 @@ class TestFooter:
 
     def test_footer_copyright_text(self, inventory_page, login):
         inventory_page.check_footer_copyright_text()
+
+
+class TestBurgerMenu:
+    def test_about_link(self, inventory_page, login):
+        inventory_page.open_about_link()
+
+    def test_logout_link(self, inventory_page, login):
+        inventory_page.logout()

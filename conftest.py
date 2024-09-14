@@ -2,6 +2,7 @@ import pytest
 from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+from pages.constants import LoginPageConstants
 
 
 @pytest.fixture
@@ -12,10 +13,9 @@ def page(context):
 
 
 @pytest.fixture
-def login(page):
-    lp = LoginPage(page)
-    lp.open_page(LoginPage.URL)
-    lp.login_into_swag_labs("standard_user", "secret_sauce")
+def login(login_page):
+    login_page.open_page(LoginPageConstants.LOGIN_PAGE_URL)
+    login_page.login_into_swag_labs(LoginPageConstants.VALID_USERNAME, LoginPageConstants.VALID_PASSWORD)
     yield
 
 
