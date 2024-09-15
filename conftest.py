@@ -2,8 +2,7 @@ import pytest
 from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
-from pages.constants import LoginPageConstants
-from utilities.generate_locators_for_item import generate_locators_for_item
+from pages.constants import LoginPageConstants, MockApiConstants
 
 
 @pytest.fixture
@@ -25,6 +24,7 @@ def login(login_page):
 def item_locators():
     """Initialization of item locators. The main idea is that all item value locators can be found similarly,
     so I don't need to use a unique locator for specific item. This method finds all needed item locators by item name."""
+
     def _init_locators(item):
         item_name = f"//div[text() = '{item}']"
         item_desc = f"{item_name}/ancestor::div[contains(@class, 'inventory_item')]//div[@data-test='inventory-item-desc']"
@@ -40,6 +40,7 @@ def item_locators():
             "button": item_button
         }
         return item_locators
+
     return _init_locators
 
 
@@ -62,4 +63,6 @@ def inventory_page(page, item_locators, request):
     item_name = getattr(request, 'param', None)
     if item_name:
         inventory_page.item_locators = item_locators(item_name)
+        inventory_page.expected_item_values = (
+            inventory_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name))
     return inventory_page

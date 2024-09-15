@@ -44,3 +44,6 @@ class BasePage:
         with self.page.context.expect_page() as new_page:
             action()
         self.page = new_page.value
+
+    def send_get_request(self, endpoint):
+        return self.page.request.get(endpoint).json()

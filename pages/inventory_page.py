@@ -6,6 +6,7 @@ class InventoryPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
         self.item_locators = None
+        self.expected_item_values = None
         self.twitter_link = self.get_element_by_test_id("social-twitter")
         self.facebook_link = self.get_element_by_test_id("social-facebook")
         self.linkedin_link = self.get_element_by_test_id("social-linkedin")
@@ -34,6 +35,10 @@ class InventoryPage(BasePage):
     @property
     def item_btn(self):
         return self.get_element_by_locator(self.item_locators['button'])
+
+    # Additional helping method
+    def get_single_item_values_from_mock_api(self, endpoint, item):
+        return self.send_get_request(endpoint)[item]
 
     # Page actions
     def click_on_twitter_link(self):
@@ -88,10 +93,8 @@ class InventoryPage(BasePage):
         self.check_page_title(LoginPageConstants.LOGIN_PAGE_TITLE)
 
     def check_item_values(self):
-        self.check_element_text(self.item_name, "Sauce Labs Backpack")
-        self.check_element_text(self.item_desc, "carry.allTheThings() with the sleek, streamlined Sly "
-                                                "Pack that melds uncompromising style with unequaled "
-                                                "laptop and tablet protection.")
-        self.check_element_text(self.item_price, "$29.99")
+        self.check_element_text(self.item_name, self.expected_item_values["name"])
+        self.check_element_text(self.item_desc, self.expected_item_values["description"])
+        self.check_element_text(self.item_price, self.expected_item_values["price"])
         self.check_element_is_visible(self.item_btn)
-        self.check_element_attribute(self.item_img_url, "src", "/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg")
+        self.check_element_attribute(self.item_img_url, "src", self.expected_item_values['image'])

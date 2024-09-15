@@ -23,3 +23,7 @@ class InventoryPageConstants:
     FOOTER_COPYRIGHT_TEXT = "© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
     ITEMS = ("Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket",
              "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)")
+
+
+class MockApiConstants:
+    GET_ALL_ITEMS = "http://127.0.0.1:5000/mock_api/items"
