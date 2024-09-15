@@ -3,6 +3,7 @@ from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.constants import LoginPageConstants
+from utilities.generate_locators_for_item import generate_locators_for_item
 
 
 @pytest.fixture
@@ -19,6 +20,13 @@ def login(login_page):
     yield
 
 
+@pytest.fixture
+def product_locators():
+    def _init_locators(item_name):
+        return generate_locators_for_item(item_name)
+    return _init_locators
+
+
 @pytest.fixture(autouse=True)
 def configure_playwright_test_id_attribute(playwright):
     playwright.selectors.set_test_id_attribute("data-test")
@@ -30,5 +38,9 @@ def login_page(page):
 
 
 @pytest.fixture
-def inventory_page(page):
-    return InventoryPage(page)
+def inventory_page(page, product_locators, request):
+    inventory_page = InventoryPage(page)
+    item_name = getattr(request, 'param', None)
+    if item_name:
+        inventory_page.item_locators = product_locators(item_name)
+    return inventory_page

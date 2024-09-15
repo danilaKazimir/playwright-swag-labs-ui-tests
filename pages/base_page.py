@@ -15,20 +15,23 @@ class BasePage:
     def get_element_by_placeholder(self, placeholder):
         return self.page.get_by_placeholder(placeholder)
 
-    def get_element_by_test_id(self, attribute):
-        return self.page.get_by_test_id(attribute)
+    def get_element_by_test_id(self, test_id):
+        return self.page.get_by_test_id(test_id)
 
     def get_element_by_locator(self, locator):
         return self.page.locator(locator)
 
-    def check_element_is_visible(self, locator):
-        expect(locator).to_be_visible()
+    def check_element_is_visible(self, element):
+        expect(element).to_be_visible()
 
-    def check_element_is_hidden(self, locator):
-        expect(locator).to_be_hidden()
+    def check_element_is_hidden(self, element):
+        expect(element).to_be_hidden()
 
-    def check_element_text(self, locator, expected_text):
-        expect(locator).to_have_text(expected_text)
+    def check_element_text(self, element, expected_text):
+        expect(element).to_have_text(expected_text)
+
+    def check_element_attribute(self, element, attr, exp_attr_value):
+        expect(element).to_have_attribute(attr, exp_attr_value)
 
     def check_page_url(self, url):
         expect(self.page).to_have_url(url)
