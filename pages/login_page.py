@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from pages.constants import InventoryPageConstants
+from pages.constants import LoginPageConstants
 
 
 class LoginPage(BasePage):
@@ -13,15 +13,10 @@ class LoginPage(BasePage):
         self.password_field_error_img = self.get_element_by_locator(".form_group svg").last
         self.error_message_x_button = self.get_element_by_test_id("error-button")
 
-    # Page actions
-    def fill_username_field(self, username):
-        self.username_field.fill(username)
-
-    def fill_password_field(self, password):
-        self.password_field.fill(password)
-
-    def click_on_submit_button(self):
-        self.submit_button.click()
+    # Page methods
+    def check_that_login_page_is_opened(self):
+        self.check_page_url(LoginPageConstants.LOGIN_PAGE_URL)
+        self.check_page_title(LoginPageConstants.LOGIN_PAGE_TITLE)
 
     def close_error_message(self):
         self.error_message_x_button.click()
@@ -30,15 +25,11 @@ class LoginPage(BasePage):
         self.check_element_is_hidden(self.error_message)
         self.check_element_is_hidden(self.error_message_x_button)
 
-    # Page methods
     def login_into_swag_labs(self, username, password, is_success_login=True, error_text=None):
-        self.fill_username_field(username)
-        self.fill_password_field(password)
-        self.click_on_submit_button()
-        if is_success_login:
-            self.check_page_url(InventoryPageConstants.INVENTORY_PAGE_URL)
-            self.check_page_title(InventoryPageConstants.INVENTORY_PAGE_TITLE)
-        else:
+        self.username_field.fill(username)
+        self.password_field.fill(password)
+        self.submit_button.click()
+        if not is_success_login:
             self.check_element_is_visible(self.username_field_error_img)
             self.check_element_is_visible(self.password_field_error_img)
             self.check_element_text(self.error_message, error_text)

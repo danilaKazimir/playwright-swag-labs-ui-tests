@@ -21,20 +21,24 @@ class TestBurgerMenu:
         inventory_page.open_burger_menu()
         inventory_page.open_about_link()
 
-    def test_logout_link(self, inventory_page, login):
+    def test_logout_link(self, inventory_page, login_page, login):
         inventory_page.open_burger_menu()
         inventory_page.logout()
+        login_page.check_that_login_page_is_opened()
 
 
 class TestItems:
-    @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
+    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
     def test_check_item_values(self, inventory_page, login):
         inventory_page.check_item_values()
 
-    @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
-    def test_open_item_page_by_clicking_on_item_name_link(self, inventory_page, login):
-        inventory_page.open_item_page_by_clicking_on_item_name_link()
+    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
+    def test_open_item_page_by_clicking_on_item_name_link(self, inventory_page, inventory_item_page, login):
+        """Test that checks item page link."""
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.check_that_inventory_item_page_is_opened()
 
-    @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
-    def test_open_item_page_by_clicking_on_item_image_link(self, inventory_page, login):
-        inventory_page.open_item_page_by_clicking_on_item_image_link()
+    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
+    def test_open_item_page_by_clicking_on_item_image_link(self, inventory_page, inventory_item_page, login):
+        inventory_page.click_on_item_image_link()
+        inventory_item_page.check_that_inventory_item_page_is_opened()
