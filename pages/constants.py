@@ -21,3 +21,9 @@ class InventoryPageConstants:
     SAUCE_LABS_COM_URL = "https://saucelabs.com/"
     SAUCE_LABS_COM_TITLE = "Sauce Labs: Cross Browser Testing, Selenium Testing & Mobile Testing"
     FOOTER_COPYRIGHT_TEXT = "© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+    ITEMS = ("Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket",
+             "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)")
+
+
+class MockApiConstants:
+    GET_ALL_ITEMS = "https://swaglabsmockapi.pythonanywhere.com/mock_api/items"

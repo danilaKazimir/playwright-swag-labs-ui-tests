@@ -3,55 +3,61 @@ from pages.constants import InventoryPageConstants, LoginPageConstants
 
 
 class InventoryPage(BasePage):
-    # Page locators
-    TWITTER_LINK_TEST_ID = "social-twitter"
-    FACEBOOK_LINK_TEST_ID = "social-facebook"
-    LINKEDIN_LINK_TEST_ID = "social-linkedin"
-    FOOTER_COPYRIGHT_TEXT_TEST_ID = "footer-copy"
-    BURGER_MENU_BUTTON = "#react-burger-menu-btn"
-    SAUCE_LABS_COM_LINK_VALUE = "About"
-    LOGOUT_LINK_VALUE = "Logout"
+    def __init__(self, page):
+        super().__init__(page)
+        self.item_locators = None
+        self.expected_item_values = None
+        self.twitter_link = self.get_element_by_test_id("social-twitter")
+        self.facebook_link = self.get_element_by_test_id("social-facebook")
+        self.linkedin_link = self.get_element_by_test_id("social-linkedin")
+        self.footer_copyright_text = self.get_element_by_test_id("footer-copy")
+        self.open_burger_menu_button = self.get_element_by_locator("#react-burger-menu-btn")
+        self.burger_menu_inner = self.get_element_by_locator(".bm-menu")
+        self.about_link = self.get_element_by_role("link", "About")
+        self.logout_link = self.get_element_by_role("link", "Logout")
 
-    # Get page elements
-    def get_twitter_link(self):
-        return self.get_element_by_test_id(self.TWITTER_LINK_TEST_ID)
+    @property
+    def item_name(self):
+        return self.get_element_by_locator(self.item_locators['name'])
 
-    def get_facebook_link(self):
-        return self.get_element_by_test_id(self.FACEBOOK_LINK_TEST_ID)
+    @property
+    def item_desc(self):
+        return self.get_element_by_locator(self.item_locators['description'])
 
-    def get_linkedin_link(self):
-        return self.get_element_by_test_id(self.LINKEDIN_LINK_TEST_ID)
+    @property
+    def item_price(self):
+        return self.get_element_by_locator(self.item_locators['price'])
 
-    def get_footer_copyright_text(self):
-        return self.get_element_by_test_id(self.FOOTER_COPYRIGHT_TEXT_TEST_ID)
+    @property
+    def item_img_url(self):
+        return self.get_element_by_locator(self.item_locators['image'])
 
-    def get_burger_button(self):
-        return self.get_element_by_locator(self.BURGER_MENU_BUTTON)
+    @property
+    def item_btn(self):
+        return self.get_element_by_locator(self.item_locators['button'])
 
-    def get_about_link(self):
-        return self.get_element_by_role("link", self.SAUCE_LABS_COM_LINK_VALUE)
-
-    def get_logout_link(self):
-        return self.get_element_by_role("link", self.LOGOUT_LINK_VALUE)
+    # Additional helping method
+    def get_single_item_values_from_mock_api(self, endpoint, item):
+        return self.send_get_request(endpoint)[item]
 
     # Page actions
     def click_on_twitter_link(self):
-        self.get_twitter_link().click()
+        self.twitter_link.click()
 
     def click_on_facebook_link(self):
-        self.get_facebook_link().click()
+        self.facebook_link.click()
 
     def click_on_linkedin_link(self):
-        self.get_linkedin_link().click()
+        self.linkedin_link.click()
 
-    def click_on_burger_button(self):
-        self.get_burger_button().click()
+    def click_on_open_burger_menu_button(self):
+        self.open_burger_menu_button.click()
 
     def click_on_about_link(self):
-        self.get_about_link().click()
+        self.about_link.click()
 
     def click_on_logout_link(self):
-        self.get_logout_link().click()
+        self.logout_link.click()
 
     # Page methods
     def open_twitter_link(self):
@@ -70,16 +76,25 @@ class InventoryPage(BasePage):
         self.check_page_title(InventoryPageConstants.LINKEDIN_PAGE_TITLE)
 
     def check_footer_copyright_text(self):
-        self.check_element_text(self.get_footer_copyright_text(), InventoryPageConstants.FOOTER_COPYRIGHT_TEXT)
+        self.check_element_text(self.footer_copyright_text, InventoryPageConstants.FOOTER_COPYRIGHT_TEXT)
+
+    def open_burger_menu(self):
+        self.click_on_open_burger_menu_button()
+        self.check_element_is_visible(self.burger_menu_inner)
 
     def open_about_link(self):
-        self.click_on_burger_button()
         self.click_on_about_link()
         self.check_page_url(InventoryPageConstants.SAUCE_LABS_COM_URL)
         self.check_page_title(InventoryPageConstants.SAUCE_LABS_COM_TITLE)
 
     def logout(self):
-        self.click_on_burger_button()
         self.click_on_logout_link()
         self.check_page_url(LoginPageConstants.LOGIN_PAGE_URL)
         self.check_page_title(LoginPageConstants.LOGIN_PAGE_TITLE)
+
+    def check_item_values(self):
+        self.check_element_text(self.item_name, self.expected_item_values["name"])
+        self.check_element_text(self.item_desc, self.expected_item_values["description"])
+        self.check_element_text(self.item_price, self.expected_item_values["price"])
+        self.check_element_is_visible(self.item_btn)
+        self.check_element_attribute(self.item_img_url, "src", self.expected_item_values['image'])

@@ -1,3 +1,7 @@
+import pytest
+from pages.constants import InventoryPageConstants
+
+
 class TestFooter:
     def test_twitter_link(self, inventory_page, login):
         inventory_page.open_twitter_link()
@@ -14,7 +18,15 @@ class TestFooter:
 
 class TestBurgerMenu:
     def test_about_link(self, inventory_page, login):
+        inventory_page.open_burger_menu()
         inventory_page.open_about_link()
 
     def test_logout_link(self, inventory_page, login):
+        inventory_page.open_burger_menu()
         inventory_page.logout()
+
+
+class TestItems:
+    @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
+    def test_check_item_values(self, inventory_page, login):
+        inventory_page.check_item_values()
