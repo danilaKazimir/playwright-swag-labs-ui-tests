@@ -26,4 +26,4 @@ class InventoryPageConstants:
 
 
 class MockApiConstants:
-    GET_ALL_ITEMS = "http://127.0.0.1:5000/mock_api/items"
+    GET_ALL_ITEMS = "https://swaglabsmockapi.pythonanywhere.com/mock_api/items"
