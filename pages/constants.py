@@ -25,5 +25,10 @@ class InventoryPageConstants:
              "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)")
 
 
+class InventoryItemPageConstants:
+    INVENTORY_ITEM_BASE_URL = "https://www.saucedemo.com/inventory-item.html?id="
+    INVENTORY_ITEM_TITLE = "Swag Labs"
+
+
 class MockApiConstants:
     GET_ALL_ITEMS = "https://swaglabsmockapi.pythonanywhere.com/mock_api/items"

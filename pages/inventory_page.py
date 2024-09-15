@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from pages.constants import InventoryPageConstants, LoginPageConstants
+from pages.constants import InventoryPageConstants, LoginPageConstants, InventoryItemPageConstants
 
 
 class InventoryPage(BasePage):
@@ -29,7 +29,7 @@ class InventoryPage(BasePage):
         return self.get_element_by_locator(self.item_locators['price'])
 
     @property
-    def item_img_url(self):
+    def item_img(self):
         return self.get_element_by_locator(self.item_locators['image'])
 
     @property
@@ -58,6 +58,12 @@ class InventoryPage(BasePage):
 
     def click_on_logout_link(self):
         self.logout_link.click()
+
+    def click_on_item_name(self):
+        self.item_name.click()
+
+    def click_on_item_image(self):
+        self.item_img.click()
 
     # Page methods
     def open_twitter_link(self):
@@ -97,4 +103,14 @@ class InventoryPage(BasePage):
         self.check_element_text(self.item_desc, self.expected_item_values["description"])
         self.check_element_text(self.item_price, self.expected_item_values["price"])
         self.check_element_is_visible(self.item_btn)
-        self.check_element_attribute(self.item_img_url, "src", self.expected_item_values['image'])
+        self.check_element_attribute(self.item_img, "src", self.expected_item_values['image'])
+
+    def open_item_page_by_clicking_on_item_name_link(self):
+        self.click_on_item_name()
+        self.check_page_url(f"{InventoryItemPageConstants.INVENTORY_ITEM_BASE_URL}{self.expected_item_values["id"]}")
+        self.check_page_title(InventoryItemPageConstants.INVENTORY_ITEM_TITLE)
+
+    def open_item_page_by_clicking_on_item_image_link(self):
+        self.click_on_item_image()
+        self.check_page_url(f"{InventoryItemPageConstants.INVENTORY_ITEM_BASE_URL}{self.expected_item_values["id"]}")
+        self.check_page_title(InventoryItemPageConstants.INVENTORY_ITEM_TITLE)

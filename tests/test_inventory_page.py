@@ -30,3 +30,11 @@ class TestItems:
     @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
     def test_check_item_values(self, inventory_page, login):
         inventory_page.check_item_values()
+
+    @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
+    def test_open_item_page_by_clicking_on_item_name_link(self, inventory_page, login):
+        inventory_page.open_item_page_by_clicking_on_item_name_link()
+
+    @pytest.mark.parametrize('inventory_page', [*InventoryPageConstants.ITEMS], indirect=True)
+    def test_open_item_page_by_clicking_on_item_image_link(self, inventory_page, login):
+        inventory_page.open_item_page_by_clicking_on_item_image_link()
