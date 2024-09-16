@@ -2,7 +2,8 @@ import pytest
 from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
-from pages.constants import LoginPageConstants, MockApiConstants
+from pages.inventory_item_page import InventoryItemPage
+from pages.constants import LoginPageConstants, MockApiConstants, InventoryPageConstants
 
 
 @pytest.fixture
@@ -57,12 +58,29 @@ def login_page(page):
 
 
 @pytest.fixture
-def inventory_page(page, item_locators, request):
-    """Initialization of the inventory page"""
+def item_name(request):
+    """Fixture to provide item_name parameter for inventory_page and inventory_item_page fixtures"""
+    return getattr(request, 'param', None)
+
+
+@pytest.fixture
+def inventory_page(page, item_locators, item_name):
+    """Initialization of the inventory page."""
     inventory_page = InventoryPage(page)
-    item_name = getattr(request, 'param', None)
     if item_name:
         inventory_page.item_locators = item_locators(item_name)
         inventory_page.expected_item_values = (
-            inventory_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name))
+            inventory_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name)
+        )
     return inventory_page
+
+
+@pytest.fixture
+def inventory_item_page(page, item_name):
+    """Initialization of the inventory item page."""
+    inventory_item_page = InventoryItemPage(page)
+    if item_name:
+        inventory_item_page.expected_item_values = (
+            inventory_item_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name)
+        )
+    return inventory_item_page
