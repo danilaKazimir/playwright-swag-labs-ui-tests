@@ -2,7 +2,7 @@ class BasePageConstants:
     TWITTER_PAGE_URL = "https://x.com/saucelabs"
     TWITTER_PAGE_TITLE = "Sauce Labs (@saucelabs) / X"
     FACEBOOK_PAGE_URL = "https://www.facebook.com/saucelabs"
-    FACEBOOK_PAGE_TITLE = "Sauce Labs | San Francisco CA | Facebook"
+    FACEBOOK_PAGE_TITLE = "Sauce Labs | Facebook"
     LINKEDIN_PAGE_URL = "https://www.linkedin.com/company/sauce-labs/"
     LINKEDIN_PAGE_TITLE = "Sauce Labs | LinkedIn"
     SAUCE_LABS_COM_URL = "https://saucelabs.com/"
