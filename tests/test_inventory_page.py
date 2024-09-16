@@ -26,6 +26,10 @@ class TestBurgerMenu:
         inventory_page.logout()
         login_page.check_that_login_page_is_opened()
 
+    def test_close_burger_menu(self, inventory_page, login):
+        inventory_page.open_burger_menu()
+        inventory_page.close_burger_menu()
+
 
 class TestItems:
     @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
@@ -46,7 +50,16 @@ class TestItems:
     def test_add_and_remove_item_from_cart(self, inventory_page, login):
         inventory_page.click_on_item_button()
         inventory_page.check_that_item_button_text_is_correct("Remove")
-        inventory_page.check_cart_badge_value_is_correct("1")
+        inventory_page.check_that_cart_badge_value_is_correct("1")
         inventory_page.click_on_item_button()
         inventory_page.check_that_item_button_text_is_correct("Add to cart")
         inventory_page.check_that_cart_badge_is_not_displayed()
+
+    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
+    def test_check_the_added_item_into_cart_status_after_re_login(self, inventory_page, login):
+        inventory_page.click_on_item_button()
+        inventory_page.open_burger_menu()
+        inventory_page.logout()
+        login()
+        inventory_page.check_that_item_button_text_is_correct("Remove")
+        inventory_page.check_that_cart_badge_value_is_correct("1")

@@ -58,7 +58,7 @@ class InventoryPage(BasePage):
     def check_that_item_button_text_is_correct(self, expected_value):
         self.check_element_text(self.item_btn, expected_value)
 
-    def check_cart_badge_value_is_correct(self, expected_value):
+    def check_that_cart_badge_value_is_correct(self, expected_value):
         self.check_element_text(self.cart_badge, expected_value)
 
     def check_that_cart_badge_is_not_displayed(self):

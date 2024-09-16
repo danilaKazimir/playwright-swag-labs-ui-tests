@@ -14,6 +14,7 @@ class BasePage:
         self.burger_menu_inner = self.get_element_by_locator(".bm-menu")
         self.burger_menu_about_link = self.get_element_by_role("link", "About")
         self.burger_menu_logout_link = self.get_element_by_role("link", "Logout")
+        self.burger_menu_close_button = self.get_element_by_locator("#react-burger-cross-btn")
 
     def open_page(self, url):
         self.page.goto(url)
@@ -85,6 +86,10 @@ class BasePage:
         self.burger_menu_about_link.click()
         self.check_page_url(BasePageConstants.SAUCE_LABS_COM_URL)
         self.check_page_title(BasePageConstants.SAUCE_LABS_COM_TITLE)
+
+    def close_burger_menu(self):
+        self.burger_menu_close_button.click()
+        self.check_element_is_hidden(self.burger_menu_inner)
 
     def logout(self):
         self.burger_menu_logout_link.click()
