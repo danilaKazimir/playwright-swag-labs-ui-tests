@@ -33,3 +33,22 @@ class TestBurgerMenu:
         inventory_item_page.open_burger_menu()
         inventory_item_page.logout()
         login_page.check_that_login_page_is_opened()
+
+    def test_close_burger_menu(self, inventory_page, inventory_item_page, login):
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.open_burger_menu()
+        inventory_item_page.close_burger_menu()
+
+    def test_return_to_inventory_page(self, inventory_page, inventory_item_page, login):
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.open_burger_menu()
+        inventory_item_page.click_on_all_item_link()
+        inventory_page.check_that_inventory_page_is_opened()
+
+
+@pytest.mark.parametrize('item_name', [InventoryPageConstants.ITEMS[0]], indirect=True)
+class TestBackToProductLink:
+    def test_return_to_inventory_page_using_link(self, inventory_page, inventory_item_page, login):
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.click_on_back_to_products_link()
+        inventory_page.check_that_inventory_page_is_opened()

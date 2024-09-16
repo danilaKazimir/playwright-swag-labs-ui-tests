@@ -12,6 +12,7 @@ class BasePage:
         self.footer_copyright_text = self.get_element_by_test_id("footer-copy")
         self.open_burger_menu_button = self.get_element_by_locator("#react-burger-menu-btn")
         self.burger_menu_inner = self.get_element_by_locator(".bm-menu")
+        self.burger_menu_all_item_link = self.get_element_by_role("link", "All Items")
         self.burger_menu_about_link = self.get_element_by_role("link", "About")
         self.burger_menu_logout_link = self.get_element_by_role("link", "Logout")
         self.burger_menu_close_button = self.get_element_by_locator("#react-burger-cross-btn")
@@ -86,6 +87,9 @@ class BasePage:
         self.burger_menu_about_link.click()
         self.check_page_url(BasePageConstants.SAUCE_LABS_COM_URL)
         self.check_page_title(BasePageConstants.SAUCE_LABS_COM_TITLE)
+
+    def click_on_all_item_link(self):
+        self.burger_menu_all_item_link.click()
 
     def close_burger_menu(self):
         self.burger_menu_close_button.click()
