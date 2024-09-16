@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.inventory_item_page import InventoryItemPage
-from pages.constants import LoginPageConstants, MockApiConstants, InventoryPageConstants
+from pages.constants import LoginPageConstants, MockApiConstants
 
 
 @pytest.fixture
@@ -16,9 +16,11 @@ def page(context):
 @pytest.fixture
 def login(login_page):
     """Login into the Swag Labs app"""
-    login_page.open_page(LoginPageConstants.LOGIN_PAGE_URL)
-    login_page.login_into_swag_labs(LoginPageConstants.VALID_USERNAME, LoginPageConstants.VALID_PASSWORD)
-    yield
+    def login_into_app():
+        login_page.open_page(LoginPageConstants.LOGIN_PAGE_URL)
+        login_page.login_into_swag_labs(LoginPageConstants.VALID_USERNAME, LoginPageConstants.VALID_PASSWORD)
+    login_into_app()
+    return login_into_app
 
 
 @pytest.fixture

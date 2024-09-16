@@ -7,6 +7,8 @@ class InventoryPage(BasePage):
         super().__init__(page)
         self.item_locators = None
         self.expected_item_values = None
+        self.cart = self.get_element_by_test_id("shopping-cart-link")
+        self.cart_badge = self.get_element_by_test_id("shopping-cart-badge")
 
     @property
     def item_name(self):
@@ -49,3 +51,15 @@ class InventoryPage(BasePage):
 
     def click_on_item_image_link(self):
         self.item_img.click()
+
+    def click_on_item_button(self):
+        self.item_btn.click()
+
+    def check_that_item_button_text_is_correct(self, expected_value):
+        self.check_element_text(self.item_btn, expected_value)
+
+    def check_that_cart_badge_value_is_correct(self, expected_value):
+        self.check_element_text(self.cart_badge, expected_value)
+
+    def check_that_cart_badge_is_not_displayed(self):
+        self.check_element_is_hidden(self.cart_badge)
