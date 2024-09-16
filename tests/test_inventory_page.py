@@ -41,3 +41,12 @@ class TestItems:
     def test_open_item_page_by_clicking_on_item_image_link(self, inventory_page, inventory_item_page, login):
         inventory_page.click_on_item_image_link()
         inventory_item_page.check_that_inventory_item_page_is_opened()
+
+    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
+    def test_add_and_remove_item_from_cart(self, inventory_page, login):
+        inventory_page.click_on_item_button()
+        inventory_page.check_that_item_button_text_is_correct("Remove")
+        inventory_page.check_cart_badge_value_is_correct("1")
+        inventory_page.click_on_item_button()
+        inventory_page.check_that_item_button_text_is_correct("Add to cart")
+        inventory_page.check_that_cart_badge_is_not_displayed()

@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.inventory_item_page import InventoryItemPage
-from pages.constants import LoginPageConstants, MockApiConstants, InventoryPageConstants
+from pages.constants import LoginPageConstants, MockApiConstants
 
 
 @pytest.fixture
