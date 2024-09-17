@@ -52,3 +52,10 @@ class TestBackToProductLink:
         inventory_page.click_on_item_name_link()
         inventory_item_page.click_on_back_to_products_link()
         inventory_page.check_that_inventory_page_is_opened()
+
+
+@pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
+class TestItem:
+    def test_check_item_values(self, inventory_page, inventory_item_page, login):
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.check_item_values()
