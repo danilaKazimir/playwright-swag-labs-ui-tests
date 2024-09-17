@@ -16,6 +16,8 @@ class BasePage:
         self.burger_menu_about_link = self.get_element_by_role("link", "About")
         self.burger_menu_logout_link = self.get_element_by_role("link", "Logout")
         self.burger_menu_close_button = self.get_element_by_locator("#react-burger-cross-btn")
+        self.cart = self.get_element_by_test_id("shopping-cart-link")
+        self.cart_badge = self.get_element_by_test_id("shopping-cart-badge")
 
     def open_page(self, url):
         self.page.goto(url)
@@ -97,3 +99,10 @@ class BasePage:
 
     def logout(self):
         self.burger_menu_logout_link.click()
+
+    # Methods with shopping cart
+    def check_that_cart_badge_value_is_correct(self, expected_value):
+        self.check_element_text(self.cart_badge, expected_value)
+
+    def check_that_cart_badge_is_not_displayed(self):
+        self.check_element_is_hidden(self.cart_badge)

@@ -45,6 +45,8 @@ class TestItems:
         inventory_item_page.check_that_inventory_item_page_is_opened()
 
     def test_add_and_remove_item_from_cart(self, inventory_page, login):
+        inventory_page.check_that_item_button_text_is_correct("Add to cart")
+        inventory_page.check_that_cart_badge_is_not_displayed()
         inventory_page.click_on_item_button()
         inventory_page.check_that_item_button_text_is_correct("Remove")
         inventory_page.check_that_cart_badge_value_is_correct("1")

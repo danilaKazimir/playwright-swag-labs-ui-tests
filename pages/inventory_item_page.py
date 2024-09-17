@@ -11,7 +11,7 @@ class InventoryItemPage(BasePage):
         self.item_description = self.get_element_by_test_id("inventory-item-desc")
         self.item_price = self.get_element_by_test_id("inventory-item-price")
         self.item_image = self.get_element_by_locator(".inventory_details_img")
-        self.item_button = self.get_element_by_test_id("add-to-cart")
+        self.item_button = self.get_element_by_locator(".btn_inventory")
 
     # Additional helping method
     def get_single_item_values_from_mock_api(self, endpoint, item):
@@ -24,6 +24,12 @@ class InventoryItemPage(BasePage):
 
     def click_on_back_to_products_link(self):
         self.back_to_products_link.click()
+
+    def click_on_item_button(self):
+        self.item_button.click()
+
+    def check_that_item_button_text_is_correct(self, expected_value):
+        self.check_element_text(self.item_button, expected_value)
 
     def check_item_values(self):
         self.check_element_text(self.item_name, self.expected_item_values["name"])
