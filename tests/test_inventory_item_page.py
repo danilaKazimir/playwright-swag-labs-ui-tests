@@ -70,3 +70,13 @@ class TestItem:
         inventory_item_page.click_on_item_button()
         inventory_item_page.check_that_item_button_text_is_correct("Add to cart")
         inventory_item_page.check_that_cart_badge_is_not_displayed()
+
+    def test_check_the_added_item_into_cart_status_after_re_login(self, inventory_page, inventory_item_page, login):
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.click_on_item_button()
+        inventory_item_page.open_burger_menu()
+        inventory_item_page.logout()
+        login()
+        inventory_page.click_on_item_name_link()
+        inventory_item_page.check_that_item_button_text_is_correct("Remove")
+        inventory_item_page.check_that_cart_badge_value_is_correct("1")
