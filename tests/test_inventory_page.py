@@ -31,23 +31,22 @@ class TestBurgerMenu:
         inventory_page.close_burger_menu()
 
 
+@pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
 class TestItems:
-    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
     def test_check_item_values(self, inventory_page, login):
         inventory_page.check_item_values()
 
-    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
     def test_open_item_page_by_clicking_on_item_name_link(self, inventory_page, inventory_item_page, login):
         inventory_page.click_on_item_name_link()
         inventory_item_page.check_that_inventory_item_page_is_opened()
 
-    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
     def test_open_item_page_by_clicking_on_item_image_link(self, inventory_page, inventory_item_page, login):
         inventory_page.click_on_item_image_link()
         inventory_item_page.check_that_inventory_item_page_is_opened()
 
-    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
     def test_add_and_remove_item_from_cart(self, inventory_page, login):
+        inventory_page.check_that_item_button_text_is_correct("Add to cart")
+        inventory_page.check_that_cart_badge_is_not_displayed()
         inventory_page.click_on_item_button()
         inventory_page.check_that_item_button_text_is_correct("Remove")
         inventory_page.check_that_cart_badge_value_is_correct("1")
@@ -55,7 +54,6 @@ class TestItems:
         inventory_page.check_that_item_button_text_is_correct("Add to cart")
         inventory_page.check_that_cart_badge_is_not_displayed()
 
-    @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
     def test_check_the_added_item_into_cart_status_after_re_login(self, inventory_page, login):
         inventory_page.click_on_item_button()
         inventory_page.open_burger_menu()

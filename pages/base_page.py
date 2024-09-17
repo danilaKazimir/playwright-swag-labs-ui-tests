@@ -12,9 +12,12 @@ class BasePage:
         self.footer_copyright_text = self.get_element_by_test_id("footer-copy")
         self.open_burger_menu_button = self.get_element_by_locator("#react-burger-menu-btn")
         self.burger_menu_inner = self.get_element_by_locator(".bm-menu")
+        self.burger_menu_all_item_link = self.get_element_by_role("link", "All Items")
         self.burger_menu_about_link = self.get_element_by_role("link", "About")
         self.burger_menu_logout_link = self.get_element_by_role("link", "Logout")
         self.burger_menu_close_button = self.get_element_by_locator("#react-burger-cross-btn")
+        self.cart = self.get_element_by_test_id("shopping-cart-link")
+        self.cart_badge = self.get_element_by_test_id("shopping-cart-badge")
 
     def open_page(self, url):
         self.page.goto(url)
@@ -87,9 +90,19 @@ class BasePage:
         self.check_page_url(BasePageConstants.SAUCE_LABS_COM_URL)
         self.check_page_title(BasePageConstants.SAUCE_LABS_COM_TITLE)
 
+    def click_on_all_item_link(self):
+        self.burger_menu_all_item_link.click()
+
     def close_burger_menu(self):
         self.burger_menu_close_button.click()
         self.check_element_is_hidden(self.burger_menu_inner)
 
     def logout(self):
         self.burger_menu_logout_link.click()
+
+    # Methods with shopping cart
+    def check_that_cart_badge_value_is_correct(self, expected_value):
+        self.check_element_text(self.cart_badge, expected_value)
+
+    def check_that_cart_badge_is_not_displayed(self):
+        self.check_element_is_hidden(self.cart_badge)
