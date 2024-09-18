@@ -7,8 +7,6 @@ class InventoryPage(BasePage):
         super().__init__(page)
         self.item_locators = None
         self.expected_item_values = None
-        # self.cart = self.get_element_by_test_id("shopping-cart-link")
-        # self.cart_badge = self.get_element_by_test_id("shopping-cart-badge")
 
     @property
     def item_name(self):
@@ -38,6 +36,8 @@ class InventoryPage(BasePage):
     def check_that_inventory_page_is_opened(self):
         self.check_page_url(InventoryPageConstants.INVENTORY_PAGE_URL)
         self.check_page_title(InventoryPageConstants.INVENTORY_PAGE_TITLE)
+        self.check_page_header(InventoryPageConstants.INVENTORY_PAGE_HEADER)
+        self.check_swag_labs_logo()
 
     def check_item_values(self):
         self.check_element_text(self.item_name, self.expected_item_values["name"])

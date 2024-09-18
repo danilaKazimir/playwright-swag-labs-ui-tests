@@ -21,6 +21,7 @@ class InventoryItemPage(BasePage):
     def check_that_inventory_item_page_is_opened(self):
         self.check_page_url(f"{InventoryItemPageConstants.INVENTORY_ITEM_BASE_URL}{self.expected_item_values["id"]}")
         self.check_page_title(InventoryItemPageConstants.INVENTORY_ITEM_TITLE)
+        self.check_swag_labs_logo()
 
     def click_on_back_to_products_link(self):
         self.back_to_products_link.click()
