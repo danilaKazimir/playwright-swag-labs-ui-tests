@@ -3,6 +3,7 @@ from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.inventory_item_page import InventoryItemPage
+from pages.cart_page import CartPage
 from pages.constants import LoginPageConstants, MockApiConstants
 
 
@@ -86,3 +87,14 @@ def inventory_item_page(page, item_name):
             inventory_item_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name)
         )
     return inventory_item_page
+
+
+@pytest.fixture
+def cart_page(page, item_name):
+    """Initialization of the cart page"""
+    cart_page = CartPage(page)
+    if item_name:
+        cart_page.expected_item_values = (
+            cart_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name)
+        )
+    return cart_page

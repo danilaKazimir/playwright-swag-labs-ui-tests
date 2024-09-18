@@ -6,6 +6,8 @@ from pages.constants import BasePageConstants
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
+        self.swag_labs_logo = self.get_element_by_text("Swag Labs", exact=True)
+        self.page_header = self.get_element_by_test_id("title")
         self.footer_twitter_link = self.get_element_by_test_id("social-twitter")
         self.footer_facebook_link = self.get_element_by_test_id("social-facebook")
         self.footer_linkedin_link = self.get_element_by_test_id("social-linkedin")
@@ -34,6 +36,9 @@ class BasePage:
     def get_element_by_locator(self, locator):
         return self.page.locator(locator)
 
+    def get_element_by_text(self, locator, exact=False):
+        return self.page.get_by_text(locator, exact=exact)
+
     def check_element_is_visible(self, element):
         expect(element).to_be_visible()
 
@@ -51,6 +56,12 @@ class BasePage:
 
     def check_page_title(self, title):
         expect(self.page).to_have_title(title)
+
+    def check_page_header(self, page_header):
+        self.check_element_text(self.page_header, page_header)
+
+    def check_swag_labs_logo(self):
+        self.check_element_text(self.swag_labs_logo, BasePageConstants.SWAG_LABS_LOGO)
 
     def open_new_browser_tab_page_by_action(self, action: Callable[[], None]) -> None:
         """Open a new browser tab after some action and change the context to the opened tab"""
@@ -106,3 +117,6 @@ class BasePage:
 
     def check_that_cart_badge_is_not_displayed(self):
         self.check_element_is_hidden(self.cart_badge)
+
+    def click_on_cart(self):
+        self.cart.click()

@@ -8,6 +8,7 @@ class BasePageConstants:
     SAUCE_LABS_COM_URL = "https://saucelabs.com/"
     SAUCE_LABS_COM_TITLE = "Sauce Labs: Cross Browser Testing, Selenium Testing & Mobile Testing"
     FOOTER_COPYRIGHT_TEXT = "© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+    SWAG_LABS_LOGO = "Swag Labs"
 
 
 class LoginPageConstants:
@@ -24,6 +25,7 @@ class LoginPageConstants:
 class InventoryPageConstants:
     INVENTORY_PAGE_URL = "https://www.saucedemo.com/inventory.html"
     INVENTORY_PAGE_TITLE = "Swag Labs"
+    INVENTORY_PAGE_HEADER = "Products"
     ITEMS = ("Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket",
              "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)")
 
@@ -31,6 +33,12 @@ class InventoryPageConstants:
 class InventoryItemPageConstants:
     INVENTORY_ITEM_BASE_URL = "https://www.saucedemo.com/inventory-item.html?id="
     INVENTORY_ITEM_TITLE = "Swag Labs"
+
+
+class CartPageConstants:
+    CART_PAGE_URL = "https://www.saucedemo.com/cart.html"
+    CART_PAGE_TITLE = "Swag Labs"
+    CART_PAGE_HEADER = "Your Cart"
 
 
 class MockApiConstants:

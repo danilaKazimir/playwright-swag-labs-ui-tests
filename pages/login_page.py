@@ -17,6 +17,7 @@ class LoginPage(BasePage):
     def check_that_login_page_is_opened(self):
         self.check_page_url(LoginPageConstants.LOGIN_PAGE_URL)
         self.check_page_title(LoginPageConstants.LOGIN_PAGE_TITLE)
+        self.check_swag_labs_logo()
 
     def close_error_message(self):
         self.error_message_x_button.click()
