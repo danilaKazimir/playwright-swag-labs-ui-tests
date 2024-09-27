@@ -13,6 +13,7 @@ class CartPage(BasePage):
         self.item_quantity = self.get_element_by_test_id("item-quantity")
         self.continue_shopping_btn = self.get_element_by_role("button", "Continue Shopping")
         self.checkout_btn = self.get_element_by_role("button", "Checkout")
+        self.cart_item_div = self.get_element_by_locator(".cart_item")
 
     # Additional helping method
     def get_single_item_values_from_mock_api(self, endpoint, item):
@@ -31,9 +32,15 @@ class CartPage(BasePage):
     def click_on_checkout_btn(self):
         self.checkout_btn.click()
 
+    def click_on_item_remove_button(self):
+        self.item_button.click()
+
     def check_item_values(self):
         self.check_element_text(self.item_name, self.expected_item_values["name"])
         self.check_element_text(self.item_description, self.expected_item_values["description"])
         self.check_element_text(self.item_price, self.expected_item_values["price"])
         self.check_element_is_visible(self.item_button)
         self.check_element_text(self.item_quantity, "1")
+
+    def check_that_item_is_not_displayed(self):
+        self.check_element_is_hidden(self.cart_item_div)

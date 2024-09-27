@@ -44,3 +44,40 @@ class TestBurgerMenu:
         cart_page.open_burger_menu()
         cart_page.click_on_all_item_link()
         inventory_page.check_that_inventory_page_is_opened()
+
+
+class TestBackToInventoryPage:
+    def test_back_to_inventory_page_when_cart_is_empty(self, inventory_page, cart_page, login):
+        inventory_page.click_on_cart()
+        cart_page.check_that_cart_page_is_opened()
+        cart_page.check_that_cart_badge_is_not_displayed()
+        cart_page.click_on_continue_shopping_btn()
+        inventory_page.check_that_inventory_page_is_opened()
+        inventory_page.check_that_cart_badge_is_not_displayed()
+
+    @pytest.mark.parametrize('item_name', [InventoryPageConstants.ITEMS[0]], indirect=True)
+    def test_back_to_inventory_page_when_cart_is_not_empty(self, inventory_page, cart_page, login):
+        inventory_page.click_on_item_button()
+        inventory_page.click_on_cart()
+        cart_page.check_that_cart_page_is_opened()
+        cart_page.click_on_continue_shopping_btn()
+        inventory_page.check_that_inventory_page_is_opened()
+        inventory_page.check_that_cart_badge_value_is_correct("1")
+
+
+@pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
+class TestItem:
+    def test_check_item_values(self, inventory_page, cart_page, login):
+        inventory_page.click_on_item_button()
+        inventory_page.click_on_cart()
+        cart_page.check_that_cart_page_is_opened()
+        cart_page.check_item_values()
+        cart_page.check_that_cart_badge_value_is_correct("1")
+
+    def test_remove_from_cart(self, inventory_page, cart_page, login):
+        inventory_page.click_on_item_button()
+        inventory_page.click_on_cart()
+        cart_page.check_that_cart_page_is_opened()
+        cart_page.click_on_item_remove_button()
+        cart_page.check_that_cart_badge_is_not_displayed()
+        cart_page.check_that_item_is_not_displayed()
