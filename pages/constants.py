@@ -53,7 +53,7 @@ class CheckoutSecondStepConstants:
     CHECKOUT_SECOND_STEP_HEADER = "Checkout: Overview"
     SAUCE_CART = "SauceCard #31337"
     SHIPPING_OPTION = "Free Pony Express Delivery!"
-    TAX_PERCENT = 7.4
+    TAX_PERCENT = 8
 
 
 class CheckoutFinishConstants:

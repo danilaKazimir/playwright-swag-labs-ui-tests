@@ -29,7 +29,7 @@ class CartPage(BasePage):
     def click_on_continue_shopping_btn(self):
         self.continue_shopping_btn.click()
 
-    def click_on_checkout_btn(self):
+    def click_on_checkout_button(self):
         self.checkout_btn.click()
 
     def click_on_item_remove_button(self):
