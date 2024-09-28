@@ -56,10 +56,6 @@ class TestBackToProductLink:
 
 @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
 class TestItem:
-    def test_check_item_values(self, inventory_page, inventory_item_page, login):
-        inventory_page.click_on_item_name_link()
-        inventory_item_page.check_item_values()
-
     def test_add_and_remove_item_from_cart(self, inventory_page, inventory_item_page, login):
         inventory_page.click_on_item_name_link()
         inventory_item_page.check_that_item_button_text_is_correct("Add to cart")

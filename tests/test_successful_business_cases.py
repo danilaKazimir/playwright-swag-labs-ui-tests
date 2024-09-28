@@ -6,6 +6,7 @@ from pages.constants import InventoryPageConstants
 class TestBuyOneItem:
     def test_buy_one_item_from_the_inventory_page(self, login, inventory_page, cart_page, checkout_first_step_page,
                                                   checkout_second_step_page, checkout_finish_page):
+        inventory_page.check_item_values()
         inventory_page.click_on_item_button()
         inventory_page.check_that_cart_badge_value_is_correct("1")
         inventory_page.click_on_cart()
@@ -44,9 +45,11 @@ class TestBuyOneItem:
     def test_buy_one_item_from_the_inventory_item_page(self, login, inventory_page, inventory_item_page, cart_page,
                                                        checkout_first_step_page, checkout_second_step_page,
                                                        checkout_finish_page):
+        inventory_page.check_item_values()
         inventory_page.click_on_item_name_link()
 
         inventory_item_page.check_that_inventory_item_page_is_opened()
+        inventory_item_page.check_item_values()
         inventory_item_page.click_on_item_button()
         inventory_item_page.check_that_cart_badge_value_is_correct("1")
         inventory_item_page.click_on_cart()
