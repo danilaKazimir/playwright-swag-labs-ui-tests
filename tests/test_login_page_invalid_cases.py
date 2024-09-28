@@ -2,13 +2,6 @@ from pages.constants import LoginPageConstants
 import pytest
 
 
-class TestSuccessfulLogin:
-    def test_successful_login_into_swag_labs(self, login_page, inventory_page):
-        login_page.open_page(LoginPageConstants.LOGIN_PAGE_URL)
-        login_page.login_into_swag_labs(LoginPageConstants.VALID_USERNAME, LoginPageConstants.VALID_PASSWORD)
-        inventory_page.check_that_inventory_page_is_opened()
-
-
 class TestUnsuccessfulLogin:
     INVALID_LOGIN_DATA = (
         ("", ""),
