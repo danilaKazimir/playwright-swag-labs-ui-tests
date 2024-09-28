@@ -56,5 +56,13 @@ class CheckoutSecondStepConstants:
     TAX_PERCENT = 7.4
 
 
+class CheckoutFinishConstants:
+    CHECKOUT_FINISH_URL = "https://www.saucedemo.com/checkout-complete.html"
+    CHECKOUT_FINISH_TITLE = "Swag Labs"
+    CHECKOUT_FINISH_HEADER = "Checkout: Complete!"
+    COMPLETE_HEADER = "Thank you for your order!"
+    COMPLETE_TEXT = "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+
+
 class MockApiConstants:
     GET_ALL_ITEMS = "https://swaglabsmockapi.pythonanywhere.com/mock_api/items"
