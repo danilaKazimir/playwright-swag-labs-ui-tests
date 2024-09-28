@@ -47,5 +47,14 @@ class CheckoutFirstStepConstants:
     CHECKOUT_FIRST_STEP_HEADER = "Checkout: Your Information"
 
 
+class CheckoutSecondStepConstants:
+    CHECKOUT_SECOND_STEP_URL = "https://www.saucedemo.com/checkout-step-two.html"
+    CHECKOUT_SECOND_STEP_TITLE = "Swag Labs"
+    CHECKOUT_SECOND_STEP_HEADER = "Checkout: Overview"
+    SAUCE_CART = "SauceCard #31337"
+    SHIPPING_OPTION = "Free Pony Express Delivery!"
+    TAX_PERCENT = 7.4
+
+
 class MockApiConstants:
     GET_ALL_ITEMS = "https://swaglabsmockapi.pythonanywhere.com/mock_api/items"
