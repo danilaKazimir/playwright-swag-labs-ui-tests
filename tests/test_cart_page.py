@@ -89,5 +89,5 @@ class TestContinueCheckout:
         inventory_page.click_on_item_button()
         inventory_page.click_on_cart()
         cart_page.check_that_cart_page_is_opened()
-        cart_page.click_on_checkout_btn()
+        cart_page.click_on_checkout_button()
         checkout_first_step_page.check_that_checkout_first_step_page_is_opened()

@@ -18,12 +18,13 @@ def page(context):
 
 
 @pytest.fixture
-def login(login_page):
+def login(login_page, inventory_page):
     """Login into the Swag Labs app"""
 
     def login_into_app():
         login_page.open_page(LoginPageConstants.LOGIN_PAGE_URL)
         login_page.login_into_swag_labs(LoginPageConstants.VALID_USERNAME, LoginPageConstants.VALID_PASSWORD)
+        inventory_page.check_that_inventory_page_is_opened()
 
     login_into_app()
     return login_into_app
@@ -112,9 +113,14 @@ def checkout_first_step_page(page):
 
 
 @pytest.fixture
-def checkout_second_step_page(page):
+def checkout_second_step_page(page, item_name):
     """Initialization of the checkout second step page"""
-    return CheckoutSecondStepPage(page)
+    checkout_second_page = CheckoutSecondStepPage(page)
+    if item_name:
+        checkout_second_page.expected_item_values = (
+            checkout_second_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name)
+        )
+    return checkout_second_page
 
 
 @pytest.fixture
