@@ -8,6 +8,7 @@ from pages.constants import LoginPageConstants, MockApiConstants
 from pages.checkout_first_step_page import CheckoutFirstStepPage
 from pages.checkout_second_step_page import CheckoutSecondStepPage
 from pages.checkout_finish_page import CheckoutFinishPage
+from utilities.faker_factory import FakerFactory
 
 
 @pytest.fixture
@@ -58,6 +59,12 @@ def item_locators():
 def configure_playwright_test_id_attribute(playwright):
     """Set test id attribute"""
     playwright.selectors.set_test_id_attribute("data-test")
+
+
+@pytest.fixture
+def faker_factory():
+    """Initialization of the test data generator class"""
+    return FakerFactory()
 
 
 @pytest.fixture
