@@ -41,5 +41,11 @@ class CartPageConstants:
     CART_PAGE_HEADER = "Your Cart"
 
 
+class CheckoutFirstStepConstants:
+    CHECKOUT_FIRST_STEP_URL = "https://www.saucedemo.com/checkout-step-one.html"
+    CHECKOUT_FIRST_STEP_TITLE = "Swag Labs"
+    CHECKOUT_FIRST_STEP_HEADER = "Checkout: Your Information"
+
+
 class MockApiConstants:
     GET_ALL_ITEMS = "https://swaglabsmockapi.pythonanywhere.com/mock_api/items"

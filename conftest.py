@@ -5,6 +5,7 @@ from pages.inventory_page import InventoryPage
 from pages.inventory_item_page import InventoryItemPage
 from pages.cart_page import CartPage
 from pages.constants import LoginPageConstants, MockApiConstants
+from pages.checkout_first_step_page import CheckoutFirstStepPage
 
 
 @pytest.fixture
@@ -17,9 +18,11 @@ def page(context):
 @pytest.fixture
 def login(login_page):
     """Login into the Swag Labs app"""
+
     def login_into_app():
         login_page.open_page(LoginPageConstants.LOGIN_PAGE_URL)
         login_page.login_into_swag_labs(LoginPageConstants.VALID_USERNAME, LoginPageConstants.VALID_PASSWORD)
+
     login_into_app()
     return login_into_app
 
@@ -98,3 +101,9 @@ def cart_page(page, item_name):
             cart_page.get_single_item_values_from_mock_api(MockApiConstants.GET_ALL_ITEMS, item_name)
         )
     return cart_page
+
+
+@pytest.fixture
+def checkout_first_step_page(page):
+    """Initialization of the checkout first step page"""
+    return CheckoutFirstStepPage(page)
