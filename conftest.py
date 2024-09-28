@@ -6,6 +6,7 @@ from pages.inventory_item_page import InventoryItemPage
 from pages.cart_page import CartPage
 from pages.constants import LoginPageConstants, MockApiConstants
 from pages.checkout_first_step_page import CheckoutFirstStepPage
+from pages.checkout_second_step_page import CheckoutSecondStepPage
 
 
 @pytest.fixture
@@ -107,3 +108,9 @@ def cart_page(page, item_name):
 def checkout_first_step_page(page):
     """Initialization of the checkout first step page"""
     return CheckoutFirstStepPage(page)
+
+
+@pytest.fixture
+def checkout_second_step_page(page):
+    """Initialization of the checkout second step page"""
+    return CheckoutSecondStepPage(page)
