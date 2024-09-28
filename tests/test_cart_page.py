@@ -81,3 +81,13 @@ class TestItem:
         cart_page.click_on_item_remove_button()
         cart_page.check_that_cart_badge_is_not_displayed()
         cart_page.check_that_item_is_not_displayed()
+
+
+@pytest.mark.parametrize('item_name', [InventoryPageConstants.ITEMS[0]], indirect=True)
+class TestContinueCheckout:
+    def test_continue_checkout(self, inventory_page, cart_page, checkout_first_step_page, login):
+        inventory_page.click_on_item_button()
+        inventory_page.click_on_cart()
+        cart_page.check_that_cart_page_is_opened()
+        cart_page.click_on_checkout_btn()
+        checkout_first_step_page.check_that_checkout_first_step_page_is_opened()
