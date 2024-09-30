@@ -45,6 +45,9 @@ class CheckoutFirstStepConstants:
     CHECKOUT_FIRST_STEP_URL = "https://www.saucedemo.com/checkout-step-one.html"
     CHECKOUT_FIRST_STEP_TITLE = "Swag Labs"
     CHECKOUT_FIRST_STEP_HEADER = "Checkout: Your Information"
+    FIRST_NAME_ERROR = "Error: First Name is required"
+    LAST_NAME_ERROR = "Error: Last Name is required"
+    ZIP_CODE_ERROR = "Error: Postal Code is required"
 
 
 class CheckoutSecondStepConstants:
@@ -62,6 +65,12 @@ class CheckoutFinishConstants:
     CHECKOUT_FINISH_HEADER = "Checkout: Complete!"
     COMPLETE_HEADER = "Thank you for your order!"
     COMPLETE_TEXT = "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+
+
+class ExceptionText:
+    ITEM_NOT_SPECIFIED = (
+        "Please, check that you specify the item that will be used in this test in pytest parametrize "
+        "(ex. @pytest.mark.parametrize('item_name', [InventoryPageConstants.ITEMS[0]], indirect=True))")
 
 
 class MockApiConstants:

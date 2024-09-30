@@ -5,7 +5,7 @@ from pages.constants import InventoryPageConstants
 @pytest.mark.parametrize('item_name', InventoryPageConstants.ITEMS, indirect=True)
 class TestBuyOneItem:
     def test_buy_one_item_from_the_inventory_page(self, login, inventory_page, cart_page, checkout_first_step_page,
-                                                  checkout_second_step_page, checkout_finish_page, faker_factory):
+                                                  checkout_second_step_page, checkout_finish_page, faker):
         inventory_page.check_item_values()
         inventory_page.click_on_item_button()
         inventory_page.check_that_cart_badge_value_is_correct("1")
@@ -18,9 +18,9 @@ class TestBuyOneItem:
 
         checkout_first_step_page.check_that_checkout_first_step_page_is_opened()
         checkout_first_step_page.check_that_cart_badge_value_is_correct("1")
-        checkout_first_step_page.fill_first_name_input(faker_factory.generate_first_name())
-        checkout_first_step_page.fill_last_name_input(faker_factory.generate_last_name())
-        checkout_first_step_page.fill_zip_code_input(faker_factory.generate_zip_code())
+        checkout_first_step_page.fill_first_name_input(faker.generate_first_name())
+        checkout_first_step_page.fill_last_name_input(faker.generate_last_name())
+        checkout_first_step_page.fill_zip_code_input(faker.generate_zip_code())
         checkout_first_step_page.click_on_continue_button()
 
         checkout_second_step_page.check_that_checkout_second_step_is_opened()
@@ -44,7 +44,7 @@ class TestBuyOneItem:
 
     def test_buy_one_item_from_the_inventory_item_page(self, login, inventory_page, inventory_item_page, cart_page,
                                                        checkout_first_step_page, checkout_second_step_page,
-                                                       checkout_finish_page, faker_factory):
+                                                       checkout_finish_page, faker):
         inventory_page.check_item_values()
         inventory_page.click_on_item_name_link()
 
@@ -61,9 +61,9 @@ class TestBuyOneItem:
 
         checkout_first_step_page.check_that_checkout_first_step_page_is_opened()
         checkout_first_step_page.check_that_cart_badge_value_is_correct("1")
-        checkout_first_step_page.fill_first_name_input(faker_factory.generate_first_name())
-        checkout_first_step_page.fill_last_name_input(faker_factory.generate_last_name())
-        checkout_first_step_page.fill_zip_code_input(faker_factory.generate_zip_code())
+        checkout_first_step_page.fill_first_name_input(faker.generate_first_name())
+        checkout_first_step_page.fill_last_name_input(faker.generate_last_name())
+        checkout_first_step_page.fill_zip_code_input(faker.generate_zip_code())
         checkout_first_step_page.click_on_continue_button()
 
         checkout_second_step_page.check_that_checkout_second_step_is_opened()

@@ -62,7 +62,7 @@ def configure_playwright_test_id_attribute(playwright):
 
 
 @pytest.fixture
-def faker_factory():
+def faker():
     """Initialization of the test data generator class"""
     return FakerFactory()
 
