@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from pages.constants import InventoryPageConstants
+from pages.constants import InventoryPageConstants, ExceptionText
 
 
 class InventoryPage(BasePage):
@@ -47,13 +47,22 @@ class InventoryPage(BasePage):
         self.check_element_attribute(self.item_img, "src", self.expected_item_values['image'])
 
     def click_on_item_name_link(self):
-        self.item_name.click()
+        try:
+            self.item_name.click()
+        except TypeError:
+            raise Exception(ExceptionText.ITEM_NOT_SPECIFIED)
 
     def click_on_item_image_link(self):
-        self.item_img.click()
+        try:
+            self.item_img.click()
+        except TypeError:
+            raise Exception(ExceptionText.ITEM_NOT_SPECIFIED)
 
     def click_on_item_button(self):
-        self.item_btn.click()
+        try:
+            self.item_btn.click()
+        except TypeError:
+            raise Exception(ExceptionText.ITEM_NOT_SPECIFIED)
 
     def check_that_item_button_text_is_correct(self, expected_value):
         self.check_element_text(self.item_btn, expected_value)

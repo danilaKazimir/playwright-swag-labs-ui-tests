@@ -44,3 +44,6 @@ class CartPage(BasePage):
 
     def check_that_item_is_not_displayed(self):
         self.check_element_is_hidden(self.cart_item_div)
+
+    def check_that_item_is_displayed(self):
+        self.check_element_is_visible(self.cart_item_div)
